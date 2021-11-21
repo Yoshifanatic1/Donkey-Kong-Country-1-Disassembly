@@ -1,0 +1,27 @@
+
+;%SPCDataBlockStart(04B8)
+base $04B8
+
+CODE_04B8:
+	MOV X, #$00
+CODE_04BA:
+	MOV A, $F4
+	CMP A, DATA_04D6
+	BEQ CODE_04BA
+	MOV DATA_04D6, A
+	AND A, #$01
+	BEQ CODE_04D3
+	MOV A, $F5
+	MOV ($F6+x), A
+	MOV A, DATA_04D6
+	MOV $F4, A
+	BRA CODE_04BA
+
+CODE_04D3:
+	JMP ($00F6+x)
+
+DATA_04D6:
+	dw $0000,$0000,$0000,$0000,$0000
+
+base off
+;%SPCDataBlockEnd(04B8)
